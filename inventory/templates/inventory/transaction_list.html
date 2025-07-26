@@ -1,0 +1,51 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-2 sm:px-4">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-3xl font-bold text-indigo-700">Stock Transactions</h2>
+    <a href="{% url 'transaction_create' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-semibold shadow transition flex items-center gap-2">
+      <span class="text-lg">&#43;</span> Add Transaction
+    </a>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-indigo-200">
+      <thead class="bg-indigo-50">
+        <tr>
+          <th class="py-3 px-6 text-left font-semibold text-indigo-700">Date</th>
+          <th class="py-3 px-6 text-left font-semibold text-indigo-700">Type</th>
+          <th class="py-3 px-6 text-left font-semibold text-indigo-700">Remarks</th>
+          <th class="py-3 px-6 text-left font-semibold text-indigo-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white">
+        {% for tx in transactions %}
+        <tr class="hover:bg-indigo-100 transition cursor-pointer">
+          <td class="py-3 px-6 whitespace-nowrap text-gray-700">{{ tx.date|date:'Y-m-d H:i' }}</td>
+          <td class="py-3 px-6 whitespace-nowrap">
+            <span class="inline-block px-2 py-1 rounded-full font-semibold text-xs {% if tx.transaction_type == 'IN' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
+              {{ tx.get_transaction_type_display }}
+            </span>
+          </td>
+          <td class="py-3 px-6 whitespace-nowrap text-gray-600">{{ tx.remarks|default:'-' }}</td>
+          <td class="py-3 px-6 whitespace-nowrap">
+            <form method="post" action="{% url 'transaction_delete' tx.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded transition flex items-center gap-1" title="Delete" onclick="return confirm('Are you sure you want to delete this transaction?');">
+                <span aria-hidden="true"></span> Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="py-6 text-center text-gray-400">No transactions available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

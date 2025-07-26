@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Warehouse MVP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-b from-gray-100 to-white min-h-screen flex flex-col">
+
+    <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        <a href="{% url 'product_list' %}" class="text-2xl font-bold text-indigo-600 hover:text-indigo-800">
+          Warehouse MVP
+        </a>
+        <div class="space-x-3 text-sm">
+          <a href="{% url 'product_list' %}" class="text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+            Products
+          </a>
+          <a href="{% url 'transaction_list' %}" class="text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+            Transactions
+          </a>
+          <a href="{% url 'inventory_summary' %}" class="text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+            Inventory
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 py-10">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white shadow-inner text-center py-6 text-gray-500 text-xs tracking-wider">
+      &copy; 2025 Warehouse MVP· Designed by Jatin
+    </footer>
+
+  </body>
+</html>
