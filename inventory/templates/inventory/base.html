@@ -15,11 +15,20 @@
   <body class="bg-gradient-to-b from-gray-100 to-white min-h-screen flex flex-col">
 
     <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         <a href="{% url 'product_list' %}" class="text-2xl font-bold text-indigo-600 hover:text-indigo-800">
           Warehouse MVP
         </a>
-        <div class="space-x-3 text-sm">
+
+        <button class="sm:hidden text-indigo-700 focus:outline-none" id="menu-btn">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <div class="hidden sm:flex space-x-4 text-sm" id="menu">
           <a href="{% url 'product_list' %}" class="text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
             Products
           </a>
@@ -31,6 +40,18 @@
           </a>
         </div>
       </div>
+
+      <div class="sm:hidden px-4 pb-4 hidden flex-col space-y-2 text-sm" id="mobile-menu">
+        <a href="{% url 'product_list' %}" class="block text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+          Products
+        </a>
+        <a href="{% url 'transaction_list' %}" class="block text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+          Transactions
+        </a>
+        <a href="{% url 'inventory_summary' %}" class="block text-indigo-700 hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-md transition">
+          Inventory
+        </a>
+      </div>
     </nav>
 
     <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 py-10">
@@ -38,8 +59,15 @@
     </main>
 
     <footer class="bg-white shadow-inner text-center py-6 text-gray-500 text-xs tracking-wider">
-      &copy; 2025 Warehouse MVP· Designed by Jatin
+      &copy; 2025 Warehouse MVP · Designed by Jatin
     </footer>
 
+    <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    </script>
   </body>
 </html>
