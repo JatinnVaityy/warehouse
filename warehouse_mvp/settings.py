@@ -1,13 +1,15 @@
 import os
 from pathlib import Path
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'replace-this-with-a-secure-key'
+SECRET_KEY = 'jatinvaity'
 
+DEBUG = False
 
-DEBUG = True
+ALLOWED_HOSTS = ['warehousee.onrender.com', '127.0.0.1', 'localhost']
 
-ALLOWED_HOSTS = ['.onrender.com']  
+CSRF_TRUSTED_ORIGINS = ['https://warehousee.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inventory',  
+    'inventory',
 ]
 
 MIDDLEWARE = [
@@ -34,7 +36,7 @@ ROOT_URLCONF = 'warehouse_mvp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -49,7 +51,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'warehouse_mvp.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -58,18 +59,10 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -78,6 +71,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
